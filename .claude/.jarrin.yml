@@ -1,0 +1,31 @@
+# Jarrin project rules — selected per repo, injected by the SessionStart
+# hook. All keys are optional; an empty file injects nothing. See the
+# jarrin-claude repo docs/config.md for the full schema.
+
+# Tier a — global rule slugs → ~/.claude/rule-library/<slug>.md
+rules:
+  - shell-zsh
+
+# Opt-in skills → ~/.claude/skill-library/<name>, linked into .claude/skills/
+skills:
+  - claudjar-monitor
+
+# Per-worktree runtime stack. `port` is the starting port worktrees increment
+# from; the start/exit commands run with PROJECT_PORT set, on session start and
+# exit inside a worktree (the main checkout is never affected).
+# project:
+#   port: 8000
+#   commands:
+#     start: docker compose up -d
+#     exit: docker compose down
+
+# Run this repo's Claude sessions in one container per checkout (docs/docker.md).
+# A layer FROM claudjar's base image adds the repo's own tools.
+# docker:
+#   enabled: true
+#   chrome: false                          # a Chrome + noVNC sidecar per checkout
+#   dockerfile: .claude/docker/Dockerfile  # the default; ARG BASE / FROM ${BASE}
+#   mounts:                                # extra binds; ~/.ssh and ~/.claude are refused
+#     - { host: ~/data, container: /data, ro: true }
+#   env:
+#     APP_ENV: dev
