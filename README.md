@@ -1,7 +1,5 @@
 # fingerprint-chromium
 
-[中文文档](README-ZH.md)
-
 *A fingerprint browser based on `Ungoogled Chromium`.*
 
 > ⚠️ **Notice**: This project provides **no technical support**. Please do not contact me for help. Anyone who contacts you asking for payment is a **scammer** — do not be fooled.
@@ -26,65 +24,13 @@ Please download the version suitable for your system from the links below. Each 
 | **Chrome 133** | [133.0.6943.126](https://github.com/adryfish/fingerprint-chromium/tree/133.0.6943.126) | [Installer](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1.1_windows_x64.zip) | [133.0.6943.126-1_linux.tar.xz](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1_linux.tar.xz) |  |
 | **Chrome 132**   | [132.0.6834.159](https://github.com/adryfish/fingerprint-chromium/tree/132.0.6834.159)               | [Installer](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1.1_windows_x64.zip) | [ 132.0.6834.159-1_linux.tar.xz ](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1_linux.tar.xz) | [132.0.6834.110-1.1_macos.dmg](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.110-1.1_macos.dmg) |
 
-For chinese users, you can download via cloud storage
-
-Quark: https://pan.quark.cn/s/9bb65af874fb
-
----
-
 You can find the compiled versions for each major Chromium release on the GitHub Release page. Download the appropriate file for your platform.
 
 ### Build from Source
 
-**SOURCE CODE IS AVAILABLE IN THE GITHUB REPOSITORY TAGS, NOT IN THE MAIN BRANCH!**
+The full source (ungoogled-chromium plus the fingerprint patches in `patches/extra/fingerprint/`) lives on the `main` branch.
 
-To maintain the integrity of this free and open source project, we've adopted a delayed source code release policy:
-
-- **Current Version**: Compiled binaries are immediately available for all users
-- **Source Code**: patch files will be released when the next version is published (typically one month later)
-
-This approach helps prevent unauthorized repackaging and profiteering from our work while maintaining our open source commitment.
-
-Once the source code is released, you can build by referring to the [`ungoogled-chromium`](https://github.com/ungoogled-software/ungoogled-chromium/blob/master/docs/building.md) documentation. Simply replace the `ungoogled-chromium` submodule URL with the `fingerprint-browser` repository URL.
-
-## 📢 Author's Other Projects
-
-<div style="border: 2px solid #f39c12; padding: 15px; background-color: #fffbe6; border-radius: 10px;">
-
-<details open>
-<summary><b>🌟 EasyChat - Claude Official Site Mirror</b></summary>
-
-🔥 **EasyChat** is a Claude official site mirror providing China direct access experience with 1:1 restoration of official features for efficient AI assistant services!
-
-- 🌐 **China Access**: Direct connection to Claude official services without VPN.
-- 🤝 **Shared Membership**: Cost-effective way to enjoy Claude member features with no account ban risks.
-- 👤 **Dedicated Membership**: Exclusive account for your personal use with Claude Code support, full member privileges with stable and uninterrupted service.
-- 🔑 **Account Hosting**: Securely host your own account with Claude Code support for seamless China direct access.
-
-🔗 **Visit**: [https://easychat.top](https://easychat.top)
-
-</details>
-
-</div>
-
-<div style="border: 2px solid #3498db; padding: 15px; background-color: #e6f3ff; border-radius: 10px; margin-top: 15px;">
-
-<details open>
-<summary><b>🛠️ Flapcode</b></summary>
-
-A one-stop solution designed for users who need Claude Code / Codex but prefer not to self-host.
-
-**Core Advantages:**
-- 🌐 **Direct China Access**: Access full Claude Code / Codex functionality at high speed without VPN
-- 👤 **Dedicated Accounts**: Individual account per user, no shared account pools, lower cost, stable and reliable
-- 💾 **Full Cache Support**: 100% cache availability for improved efficiency and cost savings
-- 🌍 **Web Supported**: Claude account also work on the Claude mirror
-
-🔗 **Visit**: [https://flapcode.com](https://flapcode.com)
-
-</details>
-
-</div>
+Build it by following the [`ungoogled-chromium` build documentation](https://github.com/ungoogled-software/ungoogled-chromium/blob/master/docs/building.md), using this repository in place of the `ungoogled-chromium` submodule.
 
 ## Features
 
@@ -230,14 +176,6 @@ chrome.exe --fingerprint=2023 --fingerprint-platform=macos --fingerprint-platfor
 | **Cloudflare**                                                                                     | ✔️                                                        |
 | ‣ [Turnstile](https://nopecha.com/demo/turnstile)                                                  | ✔️                                                        |
 
-## User Communication
-
-Scan the QR code to join QQ groups to communicate with other users
-
-<img src="qqgroup.png" alt="QQ Group QR code" width="300">
-
-If you need Chrome customization development services or are looking for custom development opportunities, please join the development customization group (QQ group 1055930761)
-
 ## Sponsors
 
 | **Sponsor** | **Description** | **Offer / Code** | **Link** |
@@ -252,6 +190,6 @@ If you need Chrome customization development services or are looking for custom 
 
  * [Ungoogled Chromium](https://github.com/ungoogled-software/ungoogled-chromium)
 
- ## License
+## License
 
 BSD-3-clause. See [LICENSE](LICENSE)
