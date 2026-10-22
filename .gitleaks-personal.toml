@@ -1,0 +1,34 @@
+# gitleaks personal-data scan. This repo is public on GitHub, so the hooks in .githooks/ refuse the
+# owner's email/domains, absolute home-directory paths and private-network addresses, alongside the
+# secret scan in .gitleaks.toml. Deliberately does not extend the default config (see there).
+
+[[rules]]
+id = "personal-email"
+description = "The owner's personal email address or an address on a personal domain"
+regex = '''(?i)\b[a-z0-9._%+-]+@(?:[a-z0-9-]+\.)*(?:rrin|jarrin)\.nl\b'''
+keywords = ["rrin.nl"]
+
+[[rules]]
+id = "personal-domain"
+description = "A host on the owner's personal domains (forge, servers, monitor)"
+regex = '''(?i)\b(?:[a-z0-9-]+\.)+(?:rrin|jarrin)\.nl\b'''
+keywords = ["rrin.nl"]
+
+[[rules]]
+id = "home-directory-path"
+description = "An absolute path into a user's home directory"
+regex = '''(?:/home/[a-z_][a-z0-9_-]*/|/Users/[A-Za-z0-9._-]+/|[A-Za-z]:\\Users\\[A-Za-z0-9._ -]+\\)'''
+keywords = ["/home/", "/users/", "\\users\\"]
+
+[[rules]]
+id = "private-ip-address"
+description = "A private-network (RFC 1918) IPv4 address"
+regex = '''\b(?:10\.(?:\d{1,3}\.){2}\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})\b'''
+keywords = ["10.", "192.168.", "172."]
+  # Third-party patches carried from upstream (rebases bring them in) may contain test
+  # addresses; this repo's own patches in patches/extra/fingerprint/ are still checked.
+  [[rules.allowlists]]
+  paths = [
+    '''^patches/(?:core|upstream-fixes)/''',
+    '''^patches/extra/(?:bromite|debian|inox-patchset|iridium-browser|ungoogled-chromium)/''',
+  ]

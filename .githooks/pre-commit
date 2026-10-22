@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Secret and personal-data scan of the staged changes (gitleaks: .gitleaks.toml for secrets,
+# .gitleaks-personal.toml for personal data).
+# Enable once per clone: git config core.hooksPath .githooks
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+command -v gitleaks >/dev/null 2>&1 || {
+  echo "pre-commit: gitleaks is not installed (https://github.com/gitleaks/gitleaks)." >&2
+  exit 1
+}
+
+status=0
+for config in .gitleaks.toml .gitleaks-personal.toml; do
+  gitleaks git --staged --config "$config" --redact --no-banner || status=1
+done
+[ "$status" -eq 0 ] || {
+  echo "pre-commit: gitleaks found secrets or personal data in the staged changes. Commit aborted." >&2
+  exit 1
+}

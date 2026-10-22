@@ -1,0 +1,8 @@
+# Known false positives in upstream history. Format: <commit>:<file>:<rule>:<line>
+# A test token in an iridium-browser patch, upstream commit from 2015.
+27f62c91a1de555f51c0bc5e6afb9be9b4fb546c:patches/iridium-browser/all-add-trk-prefixes-to-possibly-evil-connections.patch:generic-api-key:1319
+# A home-directory path in upstream's old FAQ.md.
+65809547b840f6b07cf188c805254fcf9075ff12:FAQ.md:home-directory-path:29
+# The Gitea mirror's hostname, committed to .jarrin-claude.md before the scan existed; already
+# public, removed again in the commit that added this file.
+d7922520b70d2d1871479240db0d13db62cfdf1e:.claude/.jarrin-claude.md:personal-domain:18

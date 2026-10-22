@@ -1,0 +1,7 @@
+# gitleaks secret scan: gitleaks' default rules. Personal data (the owner's email/domains, home
+# paths, private addresses) is in .gitleaks-personal.toml, a separate config because the default
+# config's global allowlist ignores anything shaped like a plain path (/home/..., /Users/...).
+# The hooks in .githooks/ run both (pre-commit: staged changes, pre-push: commits being uploaded).
+
+[extend]
+useDefault = true
