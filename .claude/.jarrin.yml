@@ -10,6 +10,17 @@ rules:
 skills:
   - claudjar-monitor
 
+# Internal tracking lives on Gitea (jarrin/fingerprint-chromium); GitHub's issues are for
+# user reports only. `origin` pushes to both forges.
+backlog:
+  repo: jarrin/fingerprint-chromium
+  plan:
+    method: gitea
+    assignee: claude
+  todo:
+    method: gitea
+    assignee: claude
+
 # Per-worktree runtime stack. `port` is the starting port worktrees increment
 # from; the start/exit commands run with PROJECT_PORT set, on session start and
 # exit inside a worktree (the main checkout is never affected).
