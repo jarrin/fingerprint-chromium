@@ -2,7 +2,7 @@
 
 *A fingerprint browser based on `Ungoogled Chromium`.*
 
-> ⚠️ **Notice**: This project provides **no technical support**. Please do not contact me for help. Anyone who contacts you asking for payment is a **scammer** — do not be fooled.
+> ⚠️ **Notice**: This project provides **no technical support**.
 
 ## Build from Source
 
