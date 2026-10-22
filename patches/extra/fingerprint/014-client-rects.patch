@@ -29,18 +29,18 @@ index cae1615009..0068a8d845 100644
 +  const base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
 +  if (command_line->HasSwitch(switches::kFingerprint)) {
 +    std::string seed_str = command_line->GetSwitchValueASCII(switches::kFingerprint);
-+    // 为x和y使用不同的组合字符串
++    // Use different combined strings for x and y
 +    std::string combined_x = seed_str + "offset_x";
 +    std::string combined_y = seed_str + "offset_y";
 +
 +    uint32_t hash_val_x = std::hash<std::string>{}(combined_x);
 +    uint32_t hash_val_y = std::hash<std::string>{}(combined_y);
 +
-+    // 映射到[-0.5, 0.5]范围
++    // Map to the [-0.5, 0.5] range
 +    double norm_x = (hash_val_x & 0xFFFFFFFF) / 4294967295.0 - 0.5;
 +    double norm_y = (hash_val_y & 0xFFFFFFFF) / 4294967295.0 - 0.5;
 +
-+    // 计算很小的偏移量：±0.001像素
++    // Compute a tiny offset: ±0.001 pixels
 +    noise_factor_x_ = norm_x * 0.002;
 +    noise_factor_y_ = norm_y * 0.002;
    }
@@ -73,12 +73,12 @@ index cb09f7eb83..595c7c71e6 100644
 +
 +  const ComputedStyle& style = *GetLayoutObject()->Style();
 +
-+  // 检查是否为绝对定位
++  // Check whether it is absolutely positioned
 +  if (style.GetPosition() != EPosition::kAbsolute) {
 +    return false;
 +  }
 +
-+  // 检查top和left是否都是"确定的"值（Zero或Fixed）
++  // Check whether top and left are both "definite" values (Zero or Fixed)
 +  const Length& top = style.Top();
 +  const Length& left = style.Left();
 +
@@ -188,7 +188,7 @@ index b6306c2cc5..da400b46f5 100644
  }
  
 +void QuadF::Offset(float x_offset, float y_offset) {
-+  // 计算轴对齐边界框的宽高
++  // Compute the width and height of the axis-aligned bounding box
 +  const auto [min, max] = Extents();
 +  float width = max.x() - min.x();
 +  float height = max.y() - min.y();

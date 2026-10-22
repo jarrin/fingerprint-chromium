@@ -23,42 +23,42 @@ index 6a7419e4a1..f8323e48b0 100644
    scoped_refptr<StaticBitmapImage> image_bitmap = Snapshot(source_buffer);
    if (image_bitmap) {
 +
-+    // 添加指纹保护：在创建 ImageDataBuffer 之前修改像素数据副本
++    // Fingerprint protection: modify a copy of the pixel data before creating the ImageDataBuffer
 +    const base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
 +    if (command_line->HasSwitch(switches::kFingerprint) &&
 +        (!command_line->HasSwitch(switches::kDisableSpoofing) ||
 +         command_line->GetSwitchValueASCII(switches::kDisableSpoofing).find("canvas") == std::string::npos)) {
 +
-+      // 获取图像的像素数据进行修改（创建完全独立的副本）
++      // Get the image's pixel data for modification (as a fully independent copy)
 +      SkImageInfo image_info = SkImageInfo::Make(
 +          image_bitmap->width(),
 +          image_bitmap->height(),
-+          kRGBA_8888_SkColorType,  // 使用标准的RGBA格式
++          kRGBA_8888_SkColorType,  // Use the standard RGBA format
 +          kUnpremul_SkAlphaType);
 +
-+      // 创建独立的像素缓冲区副本
++      // Create an independent copy of the pixel buffer
 +      size_t row_bytes = image_info.minRowBytes();
 +      size_t buffer_size = image_info.computeMinByteSize();
 +
 +      if (buffer_size > 0 && buffer_size <= partition_alloc::MaxDirectMapped()) {
 +        std::vector<uint8_t> pixel_buffer(buffer_size);
 +
-+        // 从原始图像读取像素数据到我们的副本中
++        // Read the original image's pixel data into our copy
 +        PaintImage original_paint_image = image_bitmap->PaintImageForCurrentFrame();
 +        if (original_paint_image.readPixels(image_info, pixel_buffer.data(), row_bytes, 0, 0)) {
 +
-+          // 对副本应用指纹保护修改（不影响原始数据）
++          // Apply the fingerprint modification to the copy (leaves the original data untouched)
 +          StaticBitmapImage::ShuffleSubchannelColorData(
 +              pixel_buffer.data(), image_info, 0, 0);
 +
-+          // 用修改后的像素数据创建完全新的图像对象
++          // Create an entirely new image object from the modified pixel data
 +          sk_sp<SkData> modified_data = SkData::MakeWithCopy(pixel_buffer.data(), buffer_size);
 +          if (modified_data) {
 +            sk_sp<SkImage> modified_sk_image = SkImages::RasterFromData(
 +                image_info, modified_data, row_bytes);
 +
 +            if (modified_sk_image) {
-+              // 创建新的 StaticBitmapImage，使用通用的创建方法
++              // Create a new StaticBitmapImage using the generic factory method
 +              PaintImage modified_paint_image = PaintImageBuilder::WithDefault()
 +                  .set_id(PaintImage::GetNextId())
 +                  .set_image(modified_sk_image, PaintImage::GetNextContentId())

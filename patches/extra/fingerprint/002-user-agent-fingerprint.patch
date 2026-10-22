@@ -28,7 +28,7 @@ index 5515443c88..750a0b1566 100644
 +  std::string user_agent = ShouldSendUserAgentUnifiedPlatform()
               ? BuildUnifiedPlatformUserAgentFromProduct(product)
               : BuildUserAgentFromProduct(product);
-+  // 添加品牌信息到 User-Agent
++  // Add brand information to the User-Agent
 +  user_agent += blink::GetUserAgentFingerprintBrandInfo();
 +  return user_agent;
  }
@@ -42,7 +42,7 @@ index 5515443c88..750a0b1566 100644
 +if (command_line->HasSwitch(switches::kFingerprintPlatform)) {
 +  std::string platform_value = base::ToLowerASCII(command_line->GetSwitchValueASCII(switches::kFingerprintPlatform));
 +
-+  // 判断自定义平台
++  // Determine the custom platform
 +  if (platform_value == "windows") {
 +    return "";
 +  } else if (platform_value == "linux") {
@@ -319,12 +319,12 @@ index 4eab85a17e..ec7521b7c6 100644
 +  return pos != std::string::npos ? full_version.substr(0, pos) : full_version;
 +}
 +
-+// 获取平台版本，基于 fingerprint seed 随机化
++// Get the platform version, randomized from the fingerprint seed
 +std::string GetPlatformVersion(const std::string& platform) {
 +  using namespace ungoogled::fingerprint;
 +  const base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
 +
-+  // 自定义版本优先
++  // A custom version takes precedence
 +  if (command_line->HasSwitch(switches::kFingerprintPlatformVersion)) {
 +    return command_line->GetSwitchValueASCII(switches::kFingerprintPlatformVersion);
 +  }

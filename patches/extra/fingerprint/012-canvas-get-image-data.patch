@@ -159,15 +159,15 @@ index db103dba87..b856820612 100644
 +  std::unordered_set<int> processed_rows;
 +  std::unordered_set<int> processed_cols;
 +
-+  // 扫描所有像素，找出边缘像素并直接处理
-+  for (int y = 0; y < h - 1 && modified_pixels < max_pixels; y++) {  // 排除最后一行
-+    if (processed_rows.count(y)) continue;  // 跳过已处理的行
-+    for (int x = 0; x < w - 1 && modified_pixels < max_pixels; x++) {  // 排除最后一列
-+      if (processed_cols.count(x)) continue;  // 跳过已处理的列
++  // Scan all pixels, find edge pixels and process them directly
++  for (int y = 0; y < h - 1 && modified_pixels < max_pixels; y++) {  // Exclude the last row
++    if (processed_rows.count(y)) continue;  // Skip already processed rows
++    for (int x = 0; x < w - 1 && modified_pixels < max_pixels; x++) {  // Exclude the last column
++      if (processed_cols.count(x)) continue;  // Skip already processed columns
 +      bool isEdge = false;
 +      bool isValidColor = false;
 +
-+      // 检查当前像素是否为边缘像素，并且不是纯黑或纯白
++      // Check whether the current pixel is an edge pixel and not pure black or white
 +      switch (colorType) {
 +        case kRGBA_8888_SkColorType:
 +        {
@@ -179,16 +179,16 @@ index db103dba87..b856820612 100644
 +          auto g = SkGetPackedG32(*current);
 +          auto b = SkGetPackedB32(*current);
 +
-+          // 检查是否不是纯黑或纯白
++          // Check that it is not pure black or white
 +          isValidColor = !((r == 0 && g == 0 && b == 0) || (r == 255 && g == 255 && b == 255));
 +
-+          // 检查是否为边缘（与右侧或下侧像素不同）
++          // Check whether it is an edge (differs from the pixel to the right or below)
 +          if (isValidColor) {
 +            isEdge = (*current != *right) || (*current != *bottom);
 +          }
 +
 +          if (isEdge && isValidColor) {
-+            // 直接处理这个像素
++            // Process this pixel directly
 +            std::string pixel_key_base = seed_str + "_x" + std::to_string(x) + "_y" + std::to_string(y);
 +            std::string pixel_key_r = pixel_key_base + "_r";
 +            std::string pixel_key_g = pixel_key_base + "_g";
@@ -222,16 +222,16 @@ index db103dba87..b856820612 100644
 +          auto g = SkGetPackedG32(*current);
 +          auto r = SkGetPackedB32(*current);
 +
-+          // 检查是否不是纯黑或纯白
++          // Check that it is not pure black or white
 +          isValidColor = !((r == 0 && g == 0 && b == 0) || (r == 255 && g == 255 && b == 255));
 +
-+          // 检查是否为边缘（与右侧或下侧像素不同）
++          // Check whether it is an edge (differs from the pixel to the right or below)
 +          if (isValidColor) {
 +            isEdge = (*current != *right) || (*current != *bottom);
 +          }
 +
 +          if (isEdge && isValidColor) {
-+            // 直接处理这个像素
++            // Process this pixel directly
 +            std::string pixel_key_base = seed_str + "_x" + std::to_string(x) + "_y" + std::to_string(y);
 +            std::string pixel_key_r = pixel_key_base + "_r";
 +            std::string pixel_key_g = pixel_key_base + "_g";
@@ -267,7 +267,7 @@ index db103dba87..b856820612 100644
 +          }
 +
 +          if (isEdge && isValidColor) {
-+            // 直接处理这个像素
++            // Process this pixel directly
 +            std::string pixel_key_base = seed_str + "_x" + std::to_string(x) + "_y" + std::to_string(y);
 +            std::string pixel_key_b = pixel_key_base + "_b";
 +            uint8_t shuffleB = std::hash<std::string>{}(pixel_key_b) & 1;
@@ -295,7 +295,7 @@ index db103dba87..b856820612 100644
 +          }
 +
 +          if (isEdge && isValidColor) {
-+            // 直接处理这个像素
++            // Process this pixel directly
 +            std::string pixel_key_base = seed_str + "_x" + std::to_string(x) + "_y" + std::to_string(y);
 +            std::string pixel_key_r = pixel_key_base + "_r";
 +            std::string pixel_key_g = pixel_key_base + "_g";
@@ -337,7 +337,7 @@ index db103dba87..b856820612 100644
 +          }
 +
 +          if (isEdge && isValidColor) {
-+            // 直接处理这个像素
++            // Process this pixel directly
 +            std::string pixel_key_base = seed_str + "_x" + std::to_string(x) + "_y" + std::to_string(y);
 +            std::string pixel_key_r = pixel_key_base + "_r";
 +            std::string pixel_key_g = pixel_key_base + "_g";
@@ -381,7 +381,7 @@ index db103dba87..b856820612 100644
 +          }
 +
 +          if (isEdge && isValidColor) {
-+            // 直接处理这个像素
++            // Process this pixel directly
 +            std::string pixel_key_base = seed_str + "_x" + std::to_string(x) + "_y" + std::to_string(y);
 +            std::string pixel_key_r = pixel_key_base + "_r";
 +            std::string pixel_key_g = pixel_key_base + "_g";
